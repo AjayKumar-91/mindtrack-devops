@@ -1,0 +1,27 @@
+npm install -g serve
+serve -s . -l 3000
+
+docker build -t brain-tasks-app .
+docker run -d -p 3000:80 brain-tasks-app
+
+# 1. login
+docker login
+
+# 2. build
+docker build -t brain-tasks-app .
+docker build -t ajaykumar91/brain-tasks-app:latest .
+or
+docker-compose up --build
+docker compose build
+
+# 3. tag
+docker tag brain-tasks-app ajaykumar91/brain-tasks-app:latest
+
+# 4. push
+docker push ajaykumar91/brain-tasks-app:latest
+
+
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+
+kubectl get svc

@@ -1,0 +1,8 @@
+services:
+  brain-app:
+    build: .
+    image: ajaykumar91/brain-tasks-app:latest  
+    container_name: brain-tasks-app
+    ports:
+      - "3000:80"
+    restart: unless-stopped
