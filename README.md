@@ -167,18 +167,24 @@ eksctl create cluster \
 --node-type t2.micro \
 --nodes 2
 ```
+<img width="1918" height="1033" alt="image" src="https://github.com/user-attachments/assets/8e86f7ee-6ff2-4530-aefa-b46babcf4f9d" />
+
+
 ## Step 2: Configure kubectl for EKS
 
 ### After cluster creation, configure access:
 ```bash
 aws eks --region us-east-1 update-kubeconfig --name brain-cluster
 ```
+
+
 ## Step 3: Verify EKS Cluster
 
 ### Check if nodes are running:
 ```bash
 kubectl get nodes
 ```
+
 
 # ⚙️ CI/CD Pipeline (AWS CodeBuild)
 
