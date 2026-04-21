@@ -7,9 +7,7 @@ phases:
 
   install:
     commands:
-      - echo Installing dependencies...
-      - apt-get update -y
-      - apt-get install -y docker.io
+      - echo Using pre-installed Docker
       - docker --version
 
   pre_build:
@@ -25,7 +23,6 @@ phases:
   post_build:
     commands:
       - echo Pushing image...
-      - docker tag $IMAGE_NAME $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG
       - docker push $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG
 
       # OPTIONAL: Deploy to Kubernetes

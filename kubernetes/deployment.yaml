@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: brain-app
+  name: brain-app-deployment
+  labels:
+    app: brain-app-label  
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: brain-app
+      app: brain-app-label
   template:
     metadata:
       labels:
-        app: brain-app
+        app: brain-app-label
     spec:
       containers:
-      - name: brain-app
+      - name: brain-app-container
         image: ajaykumar1998/brain-tasks-app:latest
         ports:
         - containerPort: 3000

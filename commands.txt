@@ -20,17 +20,39 @@ docker tag brain-tasks-app ajaykumar91/brain-tasks-app:latest
 # 4. push
 docker push ajaykumar91/brain-tasks-app:latest
 
+# Setup Kubernetes (EKS)
+eksctl create cluster --name brain-cluster --region us-east-1
+kubectl get nodes
 
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
 kubectl get svc
+kubectl logs <pod-name>
+
+# GitHub Push (Version Control)
+git init
+git remote add origin https://github.com/AjayKumar91/brain-tasks-devops.git
+git remote set-url origin git@github.com:AjayKumar91/brain-tasks-devops.git
+git add .
+git commit -m "Initial DevOps setup"
+git push -u origin main
 
 
-
+# Terraform
 terraform init
+terraform fmt
+terraform validate
 terraform plan
-terraform apply
+terraform apply -auto-approve
+terraform destroy -auto-approve && terraform apply -auto-approve
+terraform output
+terraform state list
+terraform state show
+VPC → Subnet → IGW → Route Table → Route Table Association → Security Group → Key Pair → EC2 → Nginx
+
+
+#k8s
 aws eks update-kubeconfig
 kubectl get nodes
 kubectl apply -f deployment.yaml
