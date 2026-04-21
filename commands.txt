@@ -25,3 +25,14 @@ kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
 kubectl get svc
+
+
+
+terraform init
+terraform plan
+terraform apply
+aws eks update-kubeconfig
+kubectl get nodes
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl get svc
