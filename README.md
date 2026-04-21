@@ -254,3 +254,4 @@ spec:
 * CloudWatch for pipeline monitoring
 
 
+<img width="1536" height="1024" alt="ChatGPT Image Apr 21, 2026, 03_00_59 PM" src="https://github.com/user-attachments/assets/bad53501-77da-4f01-9637-9203021962ae" />
