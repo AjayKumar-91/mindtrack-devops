@@ -143,6 +143,43 @@ docker pull ajaykumar91/brain-tasks-app:latest
 
 ---
 
+# EKS Cluster Setup
+
+```bash
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin
+curl --silent  --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+sudo apt install zip -y
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+## Step 1: Create EKS Cluster
+
+### Use eksctl to create the cluster:
+```bash
+eksctl create cluster \
+--name brain-cluster \
+--region us-east-1 \
+--nodegroup-name brain-nodes \
+--node-type t2.micro \
+--nodes 2
+```
+## Step 2: Configure kubectl for EKS
+
+### After cluster creation, configure access:
+```bash
+aws eks --region us-east-1 update-kubeconfig --name brain-cluster
+```
+## Step 3: Verify EKS Cluster
+
+### Check if nodes are running:
+```bash
+kubectl get nodes
+```
+
 # ⚙️ CI/CD Pipeline (AWS CodeBuild)
 
 ## buildspec.yml
