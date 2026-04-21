@@ -11,6 +11,13 @@ phases:
     commands:
       - echo Using pre-installed Docker
       - docker --version
+      - echo Installing tools...
+      - apt-get update
+      - apt-get install -y curl
+      - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/latest/bin/linux/amd64/kubectl
+      - chmod +x kubectl
+      - mv kubectl /usr/local/bin/
+      - kubectl version --client
 
   pre_build:
     commands:
