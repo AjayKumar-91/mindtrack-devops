@@ -32,8 +32,10 @@ phases:
       - echo Pushing image...
       - docker push $IMAGE_NAME:$IMAGE_TAG
 
-      - echo Updating kubeconfig...
-      - aws eks update-kubeconfig --region us-east-1 --name brain-eks-cluster
+      - echo "Checking cluster list"
+      - aws eks list-clusters
+      - echo "Updating kubeconfig"
+      - aws eks update-kubeconfig --region us-east-1 --name brain-cluster
 
       - echo Deploying to EKS...
       - kubectl apply -f kubernetes/deployment.yaml
