@@ -13,6 +13,13 @@ This project demonstrates a complete CI/CD DevOps pipeline for deploying a React
 * Optional: Kubernetes (EKS)
 
 ---
+## Create new EC2 Instance 
+
+<img width="1918" height="872" alt="image" src="https://github.com/user-attachments/assets/b8e981f9-eb14-4953-a66e-b25fc91ded3b" />
+
+## Connect EC2 to bash in my local machine
+
+<img width="1918" height="1012" alt="image" src="https://github.com/user-attachments/assets/dff4f1de-0d85-4466-a1b0-f727b828ee70" />
 
 # 🏗 Architecture
 
@@ -29,15 +36,19 @@ DockerHub → Kubernetes (EKS)
 git clone https://github.com/Vennilavanguvi/Brain-Tasks-App.git
 cd Brain-Tasks-App
 ```
+<img width="1918" height="172" alt="image" src="https://github.com/user-attachments/assets/b6ce6df7-8fa3-4050-842c-4c7d9e20096d" />
 
 ---
 
-# ▶️ Run Locally
+# ▶️ Run 
 
 ```bash
-npm install -g serve
-serve -s . -l 3000
+sudo apt update
+sudo apt install npm
 ```
+<img width="1918" height="487" alt="image" src="https://github.com/user-attachments/assets/29682a4c-2dab-4379-8f46-e74766d6e3df" />
+
+<img width="1918" height="130" alt="image" src="https://github.com/user-attachments/assets/0b16cea6-90a1-401e-8b9d-e5bb1771b745" />
 
 Application runs at:
 [http://localhost:3000](http://localhost:3000)
