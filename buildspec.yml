@@ -1,3 +1,5 @@
+version: 0.2
+
 env:
   variables:
     IMAGE_NAME: ajaykumar91/brain-tasks-app
@@ -18,21 +20,16 @@ phases:
   build:
     commands:
       - echo Build started...
-      - docker build -t ajaykumar91/brain-tasks-app:latest .
+      - docker build -t $IMAGE_NAME:$IMAGE_TAG .
 
   post_build:
     commands:
       - echo Pushing image...
       - docker push $IMAGE_NAME:$IMAGE_TAG
 
-      # OPTIONAL: Deploy to Kubernetes
       - echo Updating kubeconfig...
       - aws eks update-kubeconfig --region us-east-1 --name brain-eks-cluster
 
       - echo Deploying to EKS...
       - kubectl apply -f kubernetes/deployment.yaml
       - kubectl apply -f kubernetes/service.yaml
-
-artifacts:
-  files:
-    - '**/*'
