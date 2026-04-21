@@ -50,11 +50,15 @@ serve -s . -l 3000
 
 <img width="1918" height="130" alt="image" src="https://github.com/user-attachments/assets/0b16cea6-90a1-401e-8b9d-e5bb1771b745" />
 
-Application runs at:
-added Security Groups
+
+# Application runs at:
+
+## added Security Groups
+
 <img width="1918" height="821" alt="image" src="https://github.com/user-attachments/assets/c4c5c839-8c0f-416b-bd4d-091d1d4b7a2d" />
 
-http://18.207.122.82:3000/
+## http://18.207.122.82:3000/
+
 <img width="1918" height="976" alt="image" src="https://github.com/user-attachments/assets/86a2933c-6f55-443a-91c9-b61ab494364b" />
 
 ---
@@ -66,6 +70,9 @@ http://18.207.122.82:3000/
 ```bash
 docker build -t brain-tasks-app .
 ```
+<img width="1918" height="558" alt="image" src="https://github.com/user-attachments/assets/07e48cd9-5eaa-44c0-b232-72c2b4aeb627" />
+
+
 
 ## Run Container
 
