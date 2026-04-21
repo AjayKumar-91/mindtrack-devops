@@ -169,13 +169,13 @@ eksctl create cluster \
 ```
 <img width="1918" height="1033" alt="image" src="https://github.com/user-attachments/assets/8e86f7ee-6ff2-4530-aefa-b46babcf4f9d" />
 
-
 ## Step 2: Configure kubectl for EKS
 
 ### After cluster creation, configure access:
 ```bash
 aws eks --region us-east-1 update-kubeconfig --name brain-cluster
 ```
+<img width="1918" height="315" alt="image" src="https://github.com/user-attachments/assets/f2c0caf8-75f6-4431-a9b0-45e184df10a2" />
 
 
 ## Step 3: Verify EKS Cluster
@@ -184,6 +184,7 @@ aws eks --region us-east-1 update-kubeconfig --name brain-cluster
 ```bash
 kubectl get nodes
 ```
+<img width="1918" height="217" alt="image" src="https://github.com/user-attachments/assets/dc01dc81-cf5b-4e7a-b52a-e64e101d8830" />
 
 
 # ⚙️ CI/CD Pipeline (AWS CodeBuild)
