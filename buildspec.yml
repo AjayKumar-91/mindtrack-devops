@@ -18,12 +18,12 @@ phases:
   build:
     commands:
       - echo Build started...
-      - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+      - docker build -t ajaykumar91/brain-tasks-app:latest .
 
   post_build:
     commands:
       - echo Pushing image...
-      - docker push $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG
+      - docker push $IMAGE_NAME:$IMAGE_TAG
 
       # OPTIONAL: Deploy to Kubernetes
       - echo Updating kubeconfig...
