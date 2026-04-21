@@ -72,6 +72,11 @@ docker build -t brain-tasks-app .
 ```
 <img width="1918" height="558" alt="image" src="https://github.com/user-attachments/assets/07e48cd9-5eaa-44c0-b232-72c2b4aeb627" />
 
+<img width="1918" height="1012" alt="image" src="https://github.com/user-attachments/assets/0be4c52b-83e7-403e-9296-908a67f926af" />
+
+<img width="1918" height="507" alt="image" src="https://github.com/user-attachments/assets/2ffb0582-6063-4ebb-a50a-5583ab7ed3cd" />
+
+<img width="1918" height="1026" alt="image" src="https://github.com/user-attachments/assets/d4c57001-c3cc-49f0-8f9a-f0c933ac0c7a" />
 
 
 ## Run Container
@@ -79,6 +84,7 @@ docker build -t brain-tasks-app .
 ```bash
 docker run -d -p 3000:80 brain-tasks-app
 ```
+<img width="1918" height="288" alt="image" src="https://github.com/user-attachments/assets/e0a4973d-c045-4272-9131-003453eef1cb" />
 
 ---
 
