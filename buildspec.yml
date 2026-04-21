@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_NAME: ajaykumar1998/brain-tasks-app
+    IMAGE_NAME: ajaykumar91/brain-tasks-app
     IMAGE_TAG: latest
     AWS_REGION: us-east-1
     CLUSTER_NAME: brain-cluster
