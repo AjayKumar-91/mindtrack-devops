@@ -40,20 +40,25 @@ phases:
     commands:
       - echo "Pushing Docker image..."
       - docker push $IMAGE_NAME:$IMAGE_TAG
-
+      
       - echo "Checking AWS identity"
       - aws sts get-caller-identity
+
+      - echo "Setting AWS region"
+      - export AWS_REGION=us-east-1
 
       - echo "Updating kubeconfig"
       - aws eks update-kubeconfig --region us-east-1 --name brain-cluster
 
-      - echo "Checking kubectl config"
-      - kubectl config view
+      - echo "Verify kubeconfig file"
+      - ls -la ~/.kube
+
+      - cat ~/.kube/config
 
       - echo "Testing cluster connection"
       - kubectl get nodes
 
-      - echo "Deploying to Kubernetes..."
+      - echo "Deploying application"
       - kubectl apply -f kubernetes/deployment.yaml
       - kubectl apply -f kubernetes/service.yaml
 
