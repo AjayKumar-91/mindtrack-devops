@@ -4,8 +4,6 @@ env:
   variables:
     IMAGE_NAME: ajaykumar91/brain-tasks-app
     IMAGE_TAG: latest
-    AWS_REGION: us-east-1
-    CLUSTER_NAME: brain-cluster
 
 phases:
 
@@ -43,10 +41,16 @@ phases:
       - echo "Pushing Docker image..."
       - docker push $IMAGE_NAME:$IMAGE_TAG
 
-      - echo "Configuring kubeconfig for EKS..."
-      - aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
+      - echo "Checking AWS identity"
+      - aws sts get-caller-identity
 
-      - echo "Verifying cluster connection..."
+      - echo "Updating kubeconfig"
+      - aws eks update-kubeconfig --region us-east-1 --name brain-cluster
+
+      - echo "Checking kubectl config"
+      - kubectl config view
+
+      - echo "Testing cluster connection"
       - kubectl get nodes
 
       - echo "Deploying to Kubernetes..."
