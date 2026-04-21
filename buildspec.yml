@@ -2,58 +2,55 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_NAME: ajaykumar91/brain-tasks-app
+    IMAGE_NAME: ajaykumar1998/brain-tasks-app
     IMAGE_TAG: latest
+    AWS_REGION: us-east-1
+    CLUSTER_NAME: brain-cluster
 
 phases:
 
   install:
     commands:
-      - echo Using pre-installed Docker
-      - docker --version
-
-      - echo Installing unzip
+      - echo "Installing dependencies..."
       - apt-get update -y
-      - apt-get install -y unzip curl
+      - apt-get install -y curl unzip
 
-      - echo Installing AWS CLI v2
+      - echo "Installing AWS CLI..."
       - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       - unzip awscliv2.zip
-      - sudo ./aws/install --update -i /usr/local/aws-cli -b /usr/local/bin
-      - aws --version
+      - sudo ./aws/install --update
 
-      - echo Installing kubectl
-      - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.29.0/2024-01-04/bin/linux/amd64/kubectl
+      - echo "Installing kubectl..."
+      - curl -o kubectl https://amazon-eks.s3.us-east-1.amazonaws.com/1.29.0/2024-01-04/bin/linux/amd64/kubectl
       - chmod +x kubectl
       - mv kubectl /usr/local/bin/
-      - kubectl version --client
-
-      - echo Installing eksctl
-      - curl -s --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-      - mv /tmp/eksctl /usr/local/bin
-      - eksctl version
 
   pre_build:
     commands:
-      - echo Logging into Docker Hub...
+      - echo "Logging into DockerHub..."
       - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
+      - echo "Checking AWS identity..."
+      - aws sts get-caller-identity
 
   build:
     commands:
-      - echo Build started...
+      - echo "Building Docker image..."
       - docker build -t $IMAGE_NAME:$IMAGE_TAG .
 
   post_build:
     commands:
-      - echo Pushing image...
+      - echo "Pushing Docker image..."
       - docker push $IMAGE_NAME:$IMAGE_TAG
 
-      - echo Checking AWS identity
-      - aws sts get-caller-identity
+      - echo "Configuring kubeconfig for EKS..."
+      - aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
 
-      - echo Updating kubeconfig
-      - aws eks update-kubeconfig --region us-east-1 --name brain-cluster
+      - echo "Verifying cluster connection..."
+      - kubectl get nodes
 
-      - echo Deploying to EKS...
+      - echo "Deploying to Kubernetes..."
       - kubectl apply -f kubernetes/deployment.yaml
       - kubectl apply -f kubernetes/service.yaml
+
+      - echo "Deployment completed successfully!"
