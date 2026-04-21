@@ -236,7 +236,7 @@ GitHub → CodeBuild → DockerHub → EC2 Deployment
 
 ---
 
-# ☸️ Kubernetes (Optional)
+# ☸️ Kubernetes
 
 ## Deployment
 
