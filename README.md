@@ -253,23 +253,4 @@ spec:
 * CodeBuild logs: AWS Console
 * CloudWatch for pipeline monitoring
 
----
-
-# 📸 Submission Checklist
-
-* GitHub repository
-* DockerHub image
-* EC2 deployed URL
-* Screenshots (build, deploy, UI)
-* Pipeline success
-
----
-
-# 🎯 Final Output
-
-✔ React app containerized
-✔ Deployed on EC2
-✔ CI/CD pipeline working
-✔ DockerHub registry integrated
-✔ Optional Kubernetes support
 
