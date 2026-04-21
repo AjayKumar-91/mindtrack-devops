@@ -86,6 +86,9 @@ docker run -d -p 3000:80 brain-tasks-app
 ```
 <img width="1918" height="288" alt="image" src="https://github.com/user-attachments/assets/e0a4973d-c045-4272-9131-003453eef1cb" />
 
+## After run Dockerfile application running 
+<img width="1918" height="967" alt="image" src="https://github.com/user-attachments/assets/6c53f985-8ffe-4a1c-92d9-2fa852f854cd" />
+
 ---
 
 # 📦 DockerHub Push
@@ -95,18 +98,26 @@ docker run -d -p 3000:80 brain-tasks-app
 ```bash
 docker login
 ```
+## docker login
+<img width="1918" height="445" alt="image" src="https://github.com/user-attachments/assets/d88d0fbf-b280-487a-b6e6-eba136c5aaaa" />
+
 
 ## Tag Image
 
 ```bash
-docker tag brain-tasks-app username/brain-tasks-app:latest
+docker tag brain-tasks-app ajaykumar91/brain-tasks-app:latest
 ```
 
 ## Push Image
 
 ```bash
-docker push username/brain-tasks-app:latest
+docker push ajaykumar91/brain-tasks-app:latest
 ```
+<img width="1918" height="542" alt="image" src="https://github.com/user-attachments/assets/b4e36dbb-008d-4f68-aac8-1a9d01167b7a" />
+
+<img width="1918" height="1022" alt="image" src="https://github.com/user-attachments/assets/3924483a-7aca-44a7-a2f9-750da04187c5" />
+
+
 
 ---
 
@@ -128,19 +139,7 @@ newgrp docker
 ```bash
 docker pull ajaykumar91/brain-tasks-app:latest
 ```
-
-## Docker Login
-docker login
-
-## Run Container
-
-```bash
-docker run -d -p 3000:80 --name brain-app ajaykumar91/brain-tasks-app:latest
-```
-
-## Access App
-
-http://<EC2-PUBLIC-IP>:3000
+<img width="1918" height="172" alt="image" src="https://github.com/user-attachments/assets/b2d45fab-5df7-4bd9-8379-4754cf926340" />
 
 ---
 
