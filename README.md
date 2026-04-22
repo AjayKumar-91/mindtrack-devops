@@ -406,6 +406,11 @@ spec:
 
 # 📊 Monitoring
 
+<img width="1918" height="862" alt="image" src="https://github.com/user-attachments/assets/a68b4a66-0515-47ca-9f55-77c7396d961e" />
+<img width="1918" height="877" alt="image" src="https://github.com/user-attachments/assets/3068b997-aab8-408e-ba11-1a800fbc205f" />
+
+<img width="1918" height="885" alt="image" src="https://github.com/user-attachments/assets/ba3db660-7743-486c-9f82-6adef7ee75cb" />
+
 * EC2 logs: docker logs brain-app
 * CodeBuild logs: AWS Console
 * CloudWatch for pipeline monitoring
