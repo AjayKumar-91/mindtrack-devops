@@ -234,11 +234,25 @@ http://a499e97eaca7a4aa281e7509bff76bdb-xxxx.us-east-1.elb.amazonaws.com
 
 <img width="1918" height="867" alt="image" src="https://github.com/user-attachments/assets/87a8cc41-099b-4feb-9f0a-8bb8c6bb84aa" />
 
+<img width="1918" height="861" alt="image" src="https://github.com/user-attachments/assets/6895161e-e194-42fd-9118-eff986c00eb2" />
+
+<img width="1918" height="870" alt="image" src="https://github.com/user-attachments/assets/65c9c66e-40d1-4554-89e9-183b10ff1d44" />
+
+<img width="1907" height="875" alt="image" src="https://github.com/user-attachments/assets/3f34e256-f726-46df-8f4d-ae4ef7369c6e" />
+
+
 ## AWS CodePipeline CI/CD Setup
 ```bash
 GitHub → CodePipeline → CodeBuild → DockerHub → EKS Deployment
 ```
+<img width="1917" height="865" alt="image" src="https://github.com/user-attachments/assets/8f9e27a6-3b61-4b3f-92d8-ff6aa8f20fbd" />
+<img width="1918" height="860" alt="image" src="https://github.com/user-attachments/assets/9276730b-1206-4d49-b6d8-5fa249f1979c" />
+<img width="1918" height="871" alt="image" src="https://github.com/user-attachments/assets/3ac3ef69-3c9d-4f12-a72a-72c5cfb28c33" />
+<img width="1918" height="873" alt="image" src="https://github.com/user-attachments/assets/3c77b67c-1f0b-4130-bc75-808f5f3c2e46" />
+<img width="1918" height="871" alt="image" src="https://github.com/user-attachments/assets/705335d5-d633-449b-b38e-fbd67f01ef4f" />
+<img width="1918" height="866" alt="image" src="https://github.com/user-attachments/assets/8cfc60f5-94c7-4834-91c4-d6508c327256" />
 
+<img width="1918" height="866" alt="image" src="https://github.com/user-attachments/assets/f1bbd6b1-4439-4728-9e21-73104ed03617" />
 
 
 ## buildspec.yml
