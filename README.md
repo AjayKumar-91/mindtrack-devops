@@ -187,7 +187,55 @@ kubectl get nodes
 <img width="1918" height="217" alt="image" src="https://github.com/user-attachments/assets/dc01dc81-cf5b-4e7a-b52a-e64e101d8830" />
 
 
+# Deploy to EKS
+
+```bash
+aws eks update-kubeconfig --region us-east-1 --name brain-cluster
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
+```
+<img width="1918" height="330" alt="image" src="https://github.com/user-attachments/assets/d33dcde7-e3f5-48fc-8db6-dd0f3f1205fe" />
+
+
+# Access Application
+## Get LoadBalancer URL:
+```bash
+kubectl get svc
+http://a499e97eaca7a4aa281e7509bff76bdb-xxxx.us-east-1.elb.amazonaws.com
+```
+
+<img width="1918" height="965" alt="image" src="https://github.com/user-attachments/assets/1ee077af-ebfa-4ac6-930f-5b6db8a1e900" />
+
+
 # ⚙️ CI/CD Pipeline (AWS CodeBuild)
+## cretae CodeBuild 
+### Developer Tools -> CodeBuild -> Build projects -> Create build project
+<img width="1918" height="863" alt="image" src="https://github.com/user-attachments/assets/c7787473-60b3-4813-a54f-a8d3f2465078" />
+
+<img width="1918" height="812" alt="image" src="https://github.com/user-attachments/assets/b562cb78-90c6-4b44-823b-73b06848d52a" />
+
+<img width="1918" height="871" alt="image" src="https://github.com/user-attachments/assets/6b9412fd-6ed7-4716-b2d8-9d2943939773" />
+
+<img width="1918" height="867" alt="image" src="https://github.com/user-attachments/assets/75c237f9-7b5d-438e-89f0-45dfbc97adf9" />
+
+<img width="1918" height="873" alt="image" src="https://github.com/user-attachments/assets/c730d8ac-9d5c-47f7-8594-56785a455d29" />
+
+<img width="1918" height="866" alt="image" src="https://github.com/user-attachments/assets/0b8b1b39-3dba-4cc8-8823-56609e0ca2be" />
+
+<img width="1918" height="862" alt="image" src="https://github.com/user-attachments/assets/419aa088-4a88-43f4-974e-e991314e1f52" />
+
+<img width="1918" height="871" alt="image" src="https://github.com/user-attachments/assets/b474a6fd-e052-4266-8ca6-6201696cab58" />
+
+<img width="1918" height="873" alt="image" src="https://github.com/user-attachments/assets/338777d9-c8b0-40e1-88bb-55e1f769c6a0" />
+
+<img width="1918" height="870" alt="image" src="https://github.com/user-attachments/assets/1788823a-fe73-4252-a371-30ab02e32b7f" />
+
+## AWS CodePipeline CI/CD Setup
+```bash
+GitHub → CodePipeline → CodeBuild → DockerHub → EKS Deployment
+```
+
+
 
 ## buildspec.yml
 
@@ -203,30 +251,61 @@ phases:
 
   install:
     commands:
-      - echo Using pre-installed Docker
-      - docker --version
+      - echo "Installing dependencies..."
+      - apt-get update -y
+      - apt-get install -y curl unzip
+
+      - echo "Installing AWS CLI..."
+      - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      - unzip awscliv2.zip
+      - sudo ./aws/install --update
+
+      - echo "Installing kubectl properly..."
+      - curl -LO "https://dl.k8s.io/release/v1.29.0/bin/linux/amd64/kubectl"
+      - chmod +x kubectl
+      - mv kubectl /usr/local/bin/
+      - kubectl version --client
 
   pre_build:
     commands:
-      - echo Logging into Docker Hub...
+      - echo "Logging into DockerHub..."
       - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
+      - echo "Checking AWS identity..."
+      - aws sts get-caller-identity
 
   build:
     commands:
-      - echo Build started...
+      - echo "Building Docker image..."
       - docker build -t $IMAGE_NAME:$IMAGE_TAG .
 
   post_build:
     commands:
-      - echo Pushing image...
+      - echo "Pushing Docker image..."
       - docker push $IMAGE_NAME:$IMAGE_TAG
+      
+      - echo "Checking AWS identity"
+      - aws sts get-caller-identity
 
-      - echo Updating kubeconfig...
-      - aws eks update-kubeconfig --region us-east-1 --name brain-eks-cluster
+      - echo "Setting AWS region"
+      - export AWS_REGION=us-east-1
 
-      - echo Deploying to EKS...
+      - echo "Updating kubeconfig"
+      - aws eks update-kubeconfig --region us-east-1 --name brain-cluster
+
+      - echo "Verify kubeconfig file"
+      - ls -la ~/.kube
+
+      - cat ~/.kube/config
+
+      - echo "Testing cluster connection"
+      - kubectl get nodes
+
+      - echo "Deploying application"
       - kubectl apply -f kubernetes/deployment.yaml
       - kubectl apply -f kubernetes/service.yaml
+
+      - echo "Deployment completed successfully!"
 ```
 
 ---
@@ -247,9 +326,9 @@ kind: Deployment
 metadata:
   name: brain-app-deployment
   labels:
-    app: brain-app-label  
+    app: brain-app-label
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: brain-app-label
@@ -260,16 +339,32 @@ spec:
     spec:
       containers:
       - name: brain-app-container
-        image: ajaykumar1998/brain-tasks-app:latest
+        image: ajaykumar91/brain-tasks-app:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 80
+
         resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
           requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
             memory: "256Mi"
-            cpu: "250m"
+            cpu: "200m"
+
+        # Health checks (recommended for production)
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
 ```
 
 ## Service
@@ -286,7 +381,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000
+      targetPort: 80
 ```
 
 ---
