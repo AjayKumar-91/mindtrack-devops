@@ -230,6 +230,10 @@ http://a499e97eaca7a4aa281e7509bff76bdb-xxxx.us-east-1.elb.amazonaws.com
 
 <img width="1918" height="870" alt="image" src="https://github.com/user-attachments/assets/1788823a-fe73-4252-a371-30ab02e32b7f" />
 
+<img width="1918" height="870" alt="image" src="https://github.com/user-attachments/assets/475e73b9-d9ca-431a-b890-e3cf4a352a1b" />
+
+<img width="1918" height="867" alt="image" src="https://github.com/user-attachments/assets/87a8cc41-099b-4feb-9f0a-8bb8c6bb84aa" />
+
 ## AWS CodePipeline CI/CD Setup
 ```bash
 GitHub → CodePipeline → CodeBuild → DockerHub → EKS Deployment
