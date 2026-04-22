@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: brain-app-container
-        image: ajaykumar1998/brain-tasks-app:latest
+        image: ajaykumar91/brain-tasks-app:latest
         ports:
         - containerPort: 3000
 
